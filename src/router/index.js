@@ -1,14 +1,28 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+import StartPage from "../views/StartPage.vue";
+import Registration from "../views/Registration.vue";
+import UserRoom from "../views/UserRoom.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: "/",
-  //   name: "Home",
-  //   component: Home
-  // },
+  {
+    path: "/",
+    name: "StartPAge",
+    component: StartPage,
+  },
+  {
+    path: "/registration",
+    name: "Registration",
+    component: Registration,
+  },
+  {
+    path: "/userRoom",
+    name: "UserRoom",
+    component: UserRoom,
+  },
   // {
   //   path: "/about",
   //   name: "About",
