@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import StartPage from "../views/StartPage.vue";
 import Registration from "../views/Registration.vue";
 import UserRoom from "../views/UserRoom.vue";
+import TestingPage from "../views/TestingPage.vue";
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,11 @@ const routes = [
     path: "/userRoom",
     name: "UserRoom",
     component: UserRoom,
+  },
+  {
+    path: "/Test",
+    name: "TestingPage",
+    component: TestingPage,
   },
   // {
   //   path: "/about",

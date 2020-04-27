@@ -22,7 +22,7 @@
         </div>
         <div class="column is-3 is-vcentered">
           <b-field label="К-ть тем">
-            <b-numberinput controls-rounded v-model="themNumber"></b-numberinput>
+            <b-numberinput controls-position="compact" controls-rounded v-model="themNumber"></b-numberinput>
           </b-field>
         </div>
       </div>
