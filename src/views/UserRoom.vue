@@ -8,7 +8,9 @@
         <b-tab-item icon="brain" label="Створити тест">
           <CreateTest />
         </b-tab-item>
-        <b-tab-item icon="clipboard" label="Результати опитувань"></b-tab-item>
+        <b-tab-item icon="clipboard" label="Результати опитувань">
+          <TestResult />
+        </b-tab-item>
       </b-tabs>
     </div>
   </section>
@@ -16,9 +18,10 @@
 <script>
 import AddFile from "../components/AddFile.vue";
 import CreateTest from "../components/CreateTest.vue";
+import TestResult from "../components/TestResult.vue";
 
 export default {
-  components: { AddFile, CreateTest }
+  components: { AddFile, CreateTest, TestResult }
 };
 </script>
 <style scoped >

@@ -67,7 +67,7 @@
               >{{ option.user.first_name }}</option>
             </b-select>
           </b-field>
-          <b-field label="E-mail студентів" :label-position="labelPosition">
+          <b-field label="E-mail студентів">
             <b-input placeholder="Вводити через кому без пробілів" maxlength="500" type="textarea"></b-input>
           </b-field>
         </div>
@@ -106,5 +106,8 @@ export default {
   border: 1px solid black;
   height: 60%;
   background: black;
+}
+.is-ancestor {
+  margin: 1% !important;
 }
 </style>
