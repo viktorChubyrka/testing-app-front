@@ -1,6 +1,7 @@
 <template>
   <div class="tile is-ancestor">
-    <div class="tile is-6 is-vertical">
+    <div class="tile is-8 is-vertical">
+      <h2>{{ fileSendMessage }}</h2>
       <div class="columns">
         <div class="column is-11">
           <b-field label="Назва тесту">
@@ -16,13 +17,18 @@
                 v-for="option in data"
                 :value="option.id"
                 :key="option.id"
-              >{{ option.user.first_name }}</option>
+                >{{ option.user.first_name }}</option
+              >
             </b-select>
           </b-field>
         </div>
         <div class="column is-3 is-vcentered">
           <b-field label="К-ть тем">
-            <b-numberinput controls-position="compact" controls-rounded v-model="themNumber"></b-numberinput>
+            <b-numberinput
+              controls-position="compact"
+              controls-rounded
+              v-model="themNumber"
+            ></b-numberinput>
           </b-field>
         </div>
       </div>
@@ -36,7 +42,8 @@
                     v-for="option in data"
                     :value="option.id"
                     :key="option.id"
-                  >{{ option.user.first_name }}</option>
+                    >{{ option.user.first_name }}</option
+                  >
                 </b-select>
               </b-field>
             </div>
@@ -47,7 +54,8 @@
                     v-for="option in data"
                     :value="option.id"
                     :key="option.id"
-                  >{{ option.user.first_name }}</option>
+                    >{{ option.user.first_name }}</option
+                  >
                 </b-select>
               </b-field>
             </div>
@@ -55,10 +63,10 @@
         </div>
       </div>
     </div>
-    <div class="tile is-6 is-vertical">
+    <div class="tile is-4 is-vertical">
       <div class="columns">
-        <div class="column is-8">
-          <b-field label="Спеціальність">
+        <div class="column is-12">
+          <!-- <b-field label="Спеціальність">
             <b-select type="is-info" expanded placeholder="Спеціальність">
               <option
                 v-for="option in data"
@@ -66,12 +74,22 @@
                 :key="option.id"
               >{{ option.user.first_name }}</option>
             </b-select>
-          </b-field>
+          </b-field> -->
           <b-field label="E-mail студентів">
-            <b-input placeholder="Вводити через кому без пробілів" maxlength="500" type="textarea"></b-input>
+            <b-input
+              placeholder="Вводити через кому без пробілів"
+              maxlength="500"
+              type="textarea"
+            ></b-input>
           </b-field>
+          <div class="buttons">
+            <b-button type="is-info" style="margin-top:1rem" expanded
+              >Send</b-button
+            >
+          </div>
         </div>
-        <div class="column is-4">
+
+        <!-- <div class="column is-4">
           <b-field label="Курс">
             <b-select type="is-info" expanded placeholder="1">
               <option
@@ -82,7 +100,7 @@
             </b-select>
           </b-field>
           <div class="QR"></div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -91,15 +109,20 @@
 export default {
   data() {
     return {
-      themNumber: 0
+      themNumber: 0,
     };
   },
   methods: {
-    them: i => `Тема ${i}`
-  }
+    them: (i) => `Тема ${i}`,
+  },
+  computed: {
+    fileSendMessage() {
+      return this.$store.getters.FILE_SEND_MESSAGE;
+    },
+  },
 };
 </script>
-<style >
+<style>
 .QR {
   margin: 15% auto;
   width: 40%;
