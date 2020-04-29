@@ -8,6 +8,9 @@
         <b-tab-item icon="brain" label="Створити тест">
           <CreateTest />
         </b-tab-item>
+        <b-tab-item icon="clipboard" label="Мої тести">
+          <UserTests />
+        </b-tab-item>
         <b-tab-item icon="clipboard" label="Результати опитувань">
           <TestResult />
         </b-tab-item>
@@ -19,12 +22,19 @@
 import AddFile from "../components/AddFile.vue";
 import CreateTest from "../components/CreateTest.vue";
 import TestResult from "../components/TestResult.vue";
+import UserTests from "../components/UserTests.vue";
 
 export default {
-  components: { AddFile, CreateTest, TestResult }
+  components: { AddFile, CreateTest, TestResult, UserTests },
+  data() {
+    return {};
+  },
+  mounted() {
+    this.$store.dispatch("GET_CATEGORYS");
+  },
 };
 </script>
-<style scoped >
+<style scoped>
 body,
 html {
   height: 100%;

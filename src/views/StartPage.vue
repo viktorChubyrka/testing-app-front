@@ -63,7 +63,6 @@ export default {
   methods: {
     logIn() {
       this.$store.commit("CHANGE_IS_LOAD");
-      this.$store.dispatch("GET_CATEGORYS");
       this.$store.dispatch("LOGIN_USER", {
         user: this.userToLogIn,
         context: this,

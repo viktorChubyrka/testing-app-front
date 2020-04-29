@@ -1,7 +1,6 @@
 <template>
   <div class="tile is-ancestor">
     <div class="tile is-8 is-vertical">
-      <h2>{{ fileSendMessage }}</h2>
       <div class="columns">
         <div class="column is-11">
           <b-field label="Назва тесту">
@@ -12,95 +11,42 @@
       <div class="columns">
         <div class="column is-8">
           <b-field label="Дисципліна">
-            <b-select type="is-info" expanded placeholder="Дисципліна">
+            <b-select v-model="cat" type="is-info" expanded>
               <option
-                v-for="option in data"
-                :value="option.id"
-                :key="option.id"
-                >{{ option.user.first_name }}</option
+                v-for="(option, index) in categorys"
+                :value="[index, option.category]"
+                :key="index"
+                >{{ option.category }}</option
               >
             </b-select>
-          </b-field>
-        </div>
-        <div class="column is-3 is-vcentered">
-          <b-field label="К-ть тем">
-            <b-numberinput
-              controls-position="compact"
-              controls-rounded
-              v-model="themNumber"
-            ></b-numberinput>
           </b-field>
         </div>
       </div>
       <div class="columns">
         <div class="column is-11">
-          <div v-for="i in themNumber" :key="i" class="columns">
-            <div class="column is-9">
-              <b-field :label="them(i)">
-                <b-select expanded type="is-info" placeholder="Виберіть тему">
-                  <option
-                    v-for="option in data"
-                    :value="option.id"
-                    :key="option.id"
-                    >{{ option.user.first_name }}</option
-                  >
-                </b-select>
+          <div
+            v-for="(item, i) in categorys[cat[0]].test.topic"
+            :key="i"
+            class="columns"
+          >
+            <div class="column is-8">
+              <b-field label="Тема">
+                <h1>{{ item }}</h1>
               </b-field>
             </div>
             <div class="column">
-              <b-field label="К-сть питань">
-                <b-select expanded type="is-info" placeholder="0">
-                  <option
-                    v-for="option in data"
-                    :value="option.id"
-                    :key="option.id"
-                    >{{ option.user.first_name }}</option
-                  >
-                </b-select>
+              <b-field :label="count(+categorys[cat[0]].test.count[i])">
+                <b-numberinput
+                  min="0"
+                  :max="+categorys[cat[0]].test.count[i]"
+                  controls-position="compact"
+                  controls-rounded
+                  v-model="qCount[i]"
+                ></b-numberinput>
               </b-field>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="tile is-4 is-vertical">
-      <div class="columns">
-        <div class="column is-12">
-          <!-- <b-field label="Спеціальність">
-            <b-select type="is-info" expanded placeholder="Спеціальність">
-              <option
-                v-for="option in data"
-                :value="option.id"
-                :key="option.id"
-              >{{ option.user.first_name }}</option>
-            </b-select>
-          </b-field> -->
-          <b-field label="E-mail студентів">
-            <b-input
-              placeholder="Вводити через кому без пробілів"
-              maxlength="500"
-              type="textarea"
-            ></b-input>
-          </b-field>
-          <div class="buttons">
-            <b-button type="is-info" style="margin-top:1rem" expanded
-              >Send</b-button
-            >
-          </div>
-        </div>
-
-        <!-- <div class="column is-4">
-          <b-field label="Курс">
-            <b-select type="is-info" expanded placeholder="1">
-              <option
-                v-for="option in data"
-                :value="option.id"
-                :key="option.id"
-              >{{ option.user.first_name }}</option>
-            </b-select>
-          </b-field>
-          <div class="QR"></div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -110,14 +56,17 @@ export default {
   data() {
     return {
       themNumber: 0,
+      cat: [0, "Виберіть дисципліну"],
+      thema: [0, "Виберіть тему"],
+      qCount: [],
     };
   },
   methods: {
-    them: (i) => `Тема ${i}`,
+    count: (el) => `К-ть питань (${el})`,
   },
   computed: {
-    fileSendMessage() {
-      return this.$store.getters.FILE_SEND_MESSAGE;
+    categorys() {
+      return this.$store.getters.CATEGORYS;
     },
   },
 };

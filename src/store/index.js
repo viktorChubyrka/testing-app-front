@@ -4,7 +4,7 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 
-const Url = "http://4b74929a.ngrok.io/";
+const Url = "https://933938fb.ngrok.io/";
 
 export default new Vuex.Store({
   state: {
@@ -76,10 +76,11 @@ export default new Vuex.Store({
     },
     LOGIN_USER: async (state, payload) => {
       let data = await Axios.post(`${Url}api/user/login`, payload.user);
+      console.log(data.data);
       if (data.data.status == 200) {
-        state.commit("SET_TESTS", data.data.data.user.tests);
         state.commit("SET_LOGINERROR", "");
         state.commit("SET_USER_LOGIN", data.data.data.user.login);
+        localStorage.setItem("Login", data.data.data.user.login);
         payload.context.$router.push("/userroom");
         state.commit("CHANGE_IS_LOAD");
       } else {
@@ -88,11 +89,11 @@ export default new Vuex.Store({
       }
     },
     GET_CATEGORYS: async (state) => {
-      let data = await Axios.post(
-        `${Url}api/user/getcategory`,
-        state.getters.USER_LOGIN
-      );
-      console.log(data);
+      console.log(localStorage.getItem("Login"));
+      let data = await Axios.post(`${Url}api/user/getcategory`, {
+        login: localStorage.getItem("Login"),
+      });
+      state.commit("SET_CATEGORYS", data.data.data.tests);
     },
     SEND_FILE: async (state, payload) => {
       var formData = new FormData();
