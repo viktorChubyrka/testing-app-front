@@ -4,7 +4,7 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 
-const Url = "http://3158af71.ngrok.io/";
+const Url = "https://db05424f.ngrok.io/";
 
 export default new Vuex.Store({
   state: {
@@ -110,6 +110,11 @@ export default new Vuex.Store({
       });
       state.commit("SET_FILE_SEND_MESSAGE", data.data.data.message);
       setTimeout(state.commit("SET_FILE_SEND_MESSAGE", ""), 3000);
+    },
+    CREATE_TEST: async (state, payload) => {
+      console.log(payload);
+      let data = await Axios.post(`${Url}api/admintest/createtest`, payload);
+      console.log(data);
     },
   },
   modules: {},

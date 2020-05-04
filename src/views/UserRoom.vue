@@ -9,7 +9,7 @@
           <CreateTest />
         </b-tab-item>
         <b-tab-item icon="clipboard" label="Мої тести">
-          <UserTests />
+          <AdminTests />
         </b-tab-item>
         <b-tab-item icon="clipboard" label="Результати опитувань">
           <TestResult />
@@ -19,13 +19,13 @@
   </section>
 </template>
 <script>
-import AddFile from "../components/AddFile.vue";
-import CreateTest from "../components/CreateTest.vue";
-import TestResult from "../components/TestResult.vue";
-import UserTests from "../components/UserTests.vue";
+import AddFile from "../components/admin/AddFile.vue";
+import CreateTest from "../components/admin/CreateTest.vue";
+import TestResult from "../components/admin/TestResult.vue";
+import AdminTests from "../components/admin/AdminTests.vue";
 
 export default {
-  components: { AddFile, CreateTest, TestResult, UserTests },
+  components: { AddFile, CreateTest, TestResult, AdminTests },
   data() {
     return {};
   },

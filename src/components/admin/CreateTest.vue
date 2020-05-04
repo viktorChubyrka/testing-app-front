@@ -11,29 +11,29 @@
       <div class="columns">
         <div class="column is-8">
           <b-field label="Дисципліна">
-            <b-select v-model="cat" type="is-info" expanded>
+            <b-select placeholder="Виберіть дисципліну" v-model="cat" type="is-info" expanded>
               <option
                 v-for="(option, index) in categorys"
-                :value="[index, option.category]"
+                :value="[option]"
                 :key="index"
               >{{ option.category }}</option>
             </b-select>
           </b-field>
         </div>
       </div>
-      <div class="columns">
+      <div v-if="cat" class="columns">
         <div class="column is-11">
-          <div v-for="(item, i) in categorys[cat[0]].test.topic" :key="i" class="columns">
+          <div v-for="(item, i) in cat[0].test.topic" :key="i" class="columns">
             <div class="column is-8">
               <b-field label="Тема">
                 <h1>{{ item }}</h1>
               </b-field>
             </div>
             <div class="column">
-              <b-field :label="count(+categorys[cat[0]].test.count[i])">
+              <b-field :label="count(cat[0].test.count[i])">
                 <b-numberinput
                   min="0"
-                  :max="+categorys[cat[0]].test.count[i]"
+                  :max="cat[0].test.count[i]"
                   controls-position="compact"
                   controls-rounded
                   v-model="qCount[i]"
@@ -45,9 +45,10 @@
             <b-button
               type="is-primary"
               style="margin-top:1rem"
-              @click="sendFiles()"
+              @click="createTest()"
               expanded
             >Завантажити файли</b-button>
+            {{cat}}
           </div>
         </div>
       </div>
@@ -58,14 +59,26 @@
 export default {
   data() {
     return {
-      themNumber: 0,
-      cat: [0, "Виберіть дисципліну"],
-      thema: [0, "Виберіть тему"],
+      name: "",
+      cat: null,
       qCount: []
     };
   },
   methods: {
-    count: el => `К-ть питань (${el})`
+    count: el => `К-ть питань (${el})`,
+    createTest() {
+      let data = [];
+      if (this.cat && this.qCount.length != 0) {
+        for (let index = 0; index < this.qCount.length; index++) {
+          data.push({
+            count: this.qCount[index],
+            fileName: this.cat[0].test.filesName[index]
+          });
+        }
+      }
+      this.$store.dispatch("CREATE_TEST", { topic: data, name: this.name });
+      console.log(data);
+    }
   },
   computed: {
     categorys() {
