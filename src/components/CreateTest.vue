@@ -16,19 +16,14 @@
                 v-for="(option, index) in categorys"
                 :value="[index, option.category]"
                 :key="index"
-                >{{ option.category }}</option
-              >
+              >{{ option.category }}</option>
             </b-select>
           </b-field>
         </div>
       </div>
       <div class="columns">
         <div class="column is-11">
-          <div
-            v-for="(item, i) in categorys[cat[0]].test.topic"
-            :key="i"
-            class="columns"
-          >
+          <div v-for="(item, i) in categorys[cat[0]].test.topic" :key="i" class="columns">
             <div class="column is-8">
               <b-field label="Тема">
                 <h1>{{ item }}</h1>
@@ -46,6 +41,14 @@
               </b-field>
             </div>
           </div>
+          <div class="buttons">
+            <b-button
+              type="is-primary"
+              style="margin-top:1rem"
+              @click="sendFiles()"
+              expanded
+            >Завантажити файли</b-button>
+          </div>
         </div>
       </div>
     </div>
@@ -58,17 +61,17 @@ export default {
       themNumber: 0,
       cat: [0, "Виберіть дисципліну"],
       thema: [0, "Виберіть тему"],
-      qCount: [],
+      qCount: []
     };
   },
   methods: {
-    count: (el) => `К-ть питань (${el})`,
+    count: el => `К-ть питань (${el})`
   },
   computed: {
     categorys() {
       return this.$store.getters.CATEGORYS;
-    },
-  },
+    }
+  }
 };
 </script>
 <style>

@@ -31,13 +31,15 @@ export default {
   },
   mounted() {
     this.$store.dispatch("GET_CATEGORYS");
-  },
+  }
 };
 </script>
 <style scoped>
 body,
 html {
   height: 100%;
+  margin: 0%;
+  padding: 0%;
 }
 
 .container-main {

@@ -7,25 +7,14 @@
         <div class="tile is-child is-12">
           <div class="columns">
             <div class="column is-4">
-              <b-field label="Спеціальність">
-                <b-select type="is-info" expanded placeholder="Спеціальність">
-                  <option
-                    v-for="option in data"
-                    :value="option.id"
-                    :key="option.id"
-                  >{{ option.user.first_name }}</option>
-                </b-select>
-              </b-field>
-            </div>
-            <div class="column is-3">
               <b-field label="Дисципліна">
                 <b-select type="is-info" expanded placeholder="Дисципліна">
                   <option v-for="option in 2" :value="option" :key="option">{{ option }}</option>
                 </b-select>
               </b-field>
             </div>
-            <div class="column is-2">
-              <b-field label="Курс">
+            <div class="column is-3">
+              <b-field label="Клас">
                 <b-select type="is-info" expanded placeholder="1">
                   <option v-for="option in 2" :value="option" :key="option">{{ option }}</option>
                 </b-select>
