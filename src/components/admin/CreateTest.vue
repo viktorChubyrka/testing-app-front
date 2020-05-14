@@ -11,12 +11,18 @@
       <div class="columns">
         <div class="column is-8">
           <b-field label="Дисципліна">
-            <b-select placeholder="Виберіть дисципліну" v-model="cat" type="is-info" expanded>
+            <b-select
+              placeholder="Виберіть дисципліну"
+              v-model="cat"
+              type="is-info"
+              expanded
+            >
               <option
                 v-for="(option, index) in categorys"
                 :value="[option]"
                 :key="index"
-              >{{ option.category }}</option>
+                >{{ option.category }}</option
+              >
             </b-select>
           </b-field>
         </div>
@@ -47,8 +53,8 @@
               style="margin-top:1rem"
               @click="createTest()"
               expanded
-            >Завантажити файли</b-button>
-            {{cat}}
+              >Створити тест</b-button
+            >
           </div>
         </div>
       </div>
@@ -61,30 +67,46 @@ export default {
     return {
       name: "",
       cat: null,
-      qCount: []
+      qCount: [],
     };
   },
   methods: {
-    count: el => `К-ть питань (${el})`,
+    count: (el) => `К-ть питань (${el})`,
     createTest() {
       let data = [];
       if (this.cat && this.qCount.length != 0) {
-        for (let index = 0; index < this.qCount.length; index++) {
+        for (
+          let index = 0;
+          index < this.cat[0].test.filesName.length;
+          index++
+        ) {
           data.push({
             count: this.qCount[index],
-            fileName: this.cat[0].test.filesName[index]
+            fileName: this.cat[0].test.filesName[index],
           });
         }
       }
-      this.$store.dispatch("CREATE_TEST", { topic: data, name: this.name });
-      console.log(data);
-    }
+      this.$store.dispatch("CREATE_TEST", {
+        topic: data,
+        name: this.name,
+        login: localStorage.getItem("Login"),
+      });
+      if (this.$store.getters.STATUS == 200) {
+        alert("Тест створено успішно");
+        this.$store.commit("SET_STATUS", 0);
+      } else {
+        alert("Упс... тест не створено");
+      }
+    },
+  },
+  created() {
+    this.$store.dispatch("GET_CATEGORYS");
   },
   computed: {
     categorys() {
       return this.$store.getters.CATEGORYS;
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

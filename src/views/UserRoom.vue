@@ -11,7 +11,7 @@
         <b-tab-item icon="clipboard" label="Мої тести">
           <AdminTests />
         </b-tab-item>
-        <b-tab-item icon="clipboard" label="Результати опитувань">
+        <b-tab-item icon="check" label="Результати опитувань">
           <TestResult />
         </b-tab-item>
       </b-tabs>
@@ -31,7 +31,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("GET_CATEGORYS");
-  }
+  },
 };
 </script>
 <style scoped>

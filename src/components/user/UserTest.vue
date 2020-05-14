@@ -1,21 +1,39 @@
 <template>
   <div class="container is-fullheight">
-    <section style="width:95%;margin: auto;padding-top:10%">
+    <div v-if="log == 1">
+      <h1 style="text-align:center;font-size:40px">
+        Ви вже прошли тест
+      </h1>
+    </div>
+    <section v-else style="width:95%;margin: auto;padding-top:10%">
       <b-steps size="is-small" type="is-black">
         <b-step-item
           type="is-default"
           clickable
-          :step="i+1"
+          :step="index + 1"
           class="task"
-          v-for="(task,i) in tasks"
-          :key="i"
+          v-for="(task, index) in tests"
+          :key="index"
         >
-          <h1 style="margin:2% 0;font-weight:bold">{{task.task}}</h1>
+          <h1 style="margin:2% 0;font-weight:bold">{{ task.question }}</h1>
           <section>
-            <div v-for="(ans,i) in task.anss" :key="i" class="field">
-              <b-radio v-model="radio" :native-value="i">{{ans}}</b-radio>
+            <div v-for="(ans, i) in task.answers" :key="i" class="field">
+              <b-radio v-model="radio[index]" :native-value="i">{{
+                ans
+              }}</b-radio>
             </div>
           </section>
+        </b-step-item>
+        <b-step-item type="is-default" class="task">
+          <div class="buttons">
+            <b-button
+              type="is-primary"
+              style="margin-top:1rem"
+              @click="finishTest()"
+              expanded
+              >Завершити тест</b-button
+            >
+          </div>
         </b-step-item>
       </b-steps>
     </section>
@@ -25,34 +43,39 @@
 export default {
   data() {
     return {
-      radio: null,
-      tasks: [
-        {
-          task:
-            "askjdlLSKDHFLKSDHFLSKDHFLSDHFLKJADHFHAGDJFHGSFJDSHAGFJHSDGFJSHADGFLASDGFJSAGDFHGSDAJFGA",
-          anss: [
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd"
-          ]
-        },
-        {
-          task:
-            "askjdlLSKDHFLKSDHFLSKDHFLSDHFLKJADHFHAGDJFHGSFJDSHAGFJHSDGFJSHADGFLASDGFJSAGDFHGSDAJFGA",
-          anss: [
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd"
-          ]
-        }
-      ]
+      radio: [],
     };
-  }
+  },
+  methods: {
+    finishTest() {
+      let data = [];
+      for (let index = 0; index < this.radio.length; index++) {
+        data.push({
+          question: this.tests[index].question,
+          answer: this.tests[index].answers[this.radio[index]],
+        });
+      }
+      this.$store.dispatch("SEND_ANSWERS", {
+        test: data,
+        id: localStorage.getItem("id"),
+        name: localStorage.getItem("name"),
+      });
+    },
+  },
+  created() {
+    this.$store.dispatch("GET_TEST");
+  },
+  computed: {
+    tests() {
+      return this.$store.getters.TEST;
+    },
+    log() {
+      return localStorage.getItem("log");
+    },
+  },
 };
 </script>
-<style scoped >
+<style scoped>
 body,
 html {
   height: 100%;

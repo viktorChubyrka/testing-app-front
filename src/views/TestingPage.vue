@@ -6,31 +6,7 @@
 <script>
 export default {
   data() {
-    return {
-      radio: null,
-      tasks: [
-        {
-          task:
-            "askjdlLSKDHFLKSDHFLSKDHFLSDHFLKJADHFHAGDJFHGSFJDSHAGFJHSDGFJSHADGFLASDGFJSAGDFHGSDAJFGA",
-          anss: [
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd"
-          ]
-        },
-        {
-          task:
-            "askjdlLSKDHFLKSDHFLSKDHFLSDHFLKJADHFHAGDJFHGSFJDSHAGFJHSDGFJSHADGFLASDGFJSAGDFHGSDAJFGA",
-          anss: [
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd",
-            "dsjfhsdjkhfkjsdhfjksd"
-          ]
-        }
-      ]
-    };
+    return {};
   }
 };
 </script>

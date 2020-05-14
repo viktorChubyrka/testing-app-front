@@ -75,13 +75,14 @@
               </p>
               <p>
                 Перетягніть свої файли сюди або натисніть щоб завантажити
-                <br />(підтримуються файли формату .csv)
+                <br />(підтримуються файли формату .doc .tec .csv)
               </p>
             </div>
           </section>
         </b-upload>
         <div class="buttons">
           <b-button
+            :disabled="disable"
             type="is-primary"
             style="margin-top:1rem"
             @click="sendFiles()"
@@ -97,10 +98,10 @@
 export default {
   data() {
     return {
+      disable: false,
       topic: "",
       clas: 1,
       category: "",
-      number: 0,
       dropFiles: [],
       errors: [],
     };
@@ -114,10 +115,16 @@ export default {
       let fileIndex = this.dropFiles.length;
       let splitedFileName = this.dropFiles[fileIndex - 1].name.split(".");
       let fileNameIndex = splitedFileName.length;
-      if (splitedFileName[fileNameIndex - 1] == "txt") {
-        this.errors.push("Формат файлу не підтримується");
-      } else {
+      if (
+        splitedFileName[fileNameIndex - 1] == "doc" ||
+        splitedFileName[fileNameIndex - 1] == "csv" ||
+        splitedFileName[fileNameIndex - 1] == "tec"
+      ) {
+        this.disable = false;
         this.errors.push(null);
+      } else {
+        this.disable = true;
+        this.errors.push("Формат файлу не підтримується");
       }
     },
     sendFiles() {

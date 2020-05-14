@@ -1,22 +1,15 @@
-
-  
-  <template>
+<template>
   <div class="tile is-ancestor">
     <div class="tile is-12 is-vertical">
       <div class="tile is-parent is-vertical">
         <div class="tile is-child is-12">
           <div class="columns">
-            <div class="column is-4">
+            <div class="column is-6">
               <b-field label="Дисципліна">
                 <b-select type="is-info" expanded placeholder="Дисципліна">
-                  <option v-for="option in 2" :value="option" :key="option">{{ option }}</option>
-                </b-select>
-              </b-field>
-            </div>
-            <div class="column is-3">
-              <b-field label="Клас">
-                <b-select type="is-info" expanded placeholder="1">
-                  <option v-for="option in 2" :value="option" :key="option">{{ option }}</option>
+                  <option v-for="option in 2" :value="option" :key="option">{{
+                    option
+                  }}</option>
                 </b-select>
               </b-field>
             </div>
@@ -27,7 +20,9 @@
             <div class="column is-6">
               <b-field label="Назва тесту">
                 <b-select type="is-info" expanded placeholder="Назва тесту">
-                  <option v-for="option in 2" :value="option" :key="option">{{ option }}</option>
+                  <option v-for="option in 2" :value="option" :key="option">{{
+                    option
+                  }}</option>
                 </b-select>
               </b-field>
             </div>
@@ -47,12 +42,12 @@
         <div class="tile is-child is-6">
           <div class="ansvers">
             <div
-              :class="task.color?colors[1]:colors[0]"
+              :class="task.color ? colors[1] : colors[0]"
               v-for="(task, index) in tasks"
               :key="index"
             >
-              <h2>{{index+1}} {{task.task}}</h2>
-              <h2>({{task.userAnsver}})</h2>
+              <h2>{{ index + 1 }} {{ task.task }}</h2>
+              <h2>({{ task.userAnsver }})</h2>
             </div>
           </div>
         </div>
@@ -67,13 +62,13 @@ export default {
       {
         id: 1,
         name: "Петренко Петро",
-        mark: 10
+        mark: 10,
       },
       {
         id: 2,
         name: "Іваненко Іван",
-        mark: 2
-      }
+        mark: 2,
+      },
     ];
     return {
       colors: ["red", "green"],
@@ -82,20 +77,20 @@ export default {
           count: "1",
           task: "How old are you?",
           userAnsver: "12",
-          color: false
+          color: false,
         },
         {
           count: "1",
           task: "How old are you?",
           userAnsver: "12",
-          color: false
+          color: false,
         },
         {
           count: "1",
           task: "How old are you?",
           userAnsver: "12",
-          color: true
-        }
+          color: true,
+        },
       ],
       users,
       select: null,
@@ -105,9 +100,9 @@ export default {
         {
           field: "mark",
           label: "Оцінка",
-          centered: true
-        }
-      ]
+          centered: true,
+        },
+      ],
     };
   },
 
@@ -116,11 +111,11 @@ export default {
       {
         console.log(this.s);
       }
-    }
-  }
+    },
+  },
 };
 </script>
-<style >
+<style>
 .red {
   color: red;
 }
@@ -131,6 +126,3 @@ export default {
   margin: 0 3%;
 }
 </style>
-
-
-

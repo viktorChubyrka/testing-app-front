@@ -4,7 +4,7 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 
-const Url = "https://db05424f.ngrok.io/";
+const Url = "https://a092de36.ngrok.io/";
 
 export default new Vuex.Store({
   state: {
@@ -15,6 +15,8 @@ export default new Vuex.Store({
     userLogin: "",
     fileSendMessage: "",
     categorys: [],
+    status: "",
+    test: [],
   },
   getters: {
     LOGINERROR: (state) => {
@@ -38,6 +40,12 @@ export default new Vuex.Store({
     IS_LOAD: (state) => {
       return state.isLoad;
     },
+    STATUS: (state) => {
+      return state.status;
+    },
+    TEST: (state) => {
+      return state.test;
+    },
   },
   mutations: {
     SET_LOGINERROR: (state, payload) => {
@@ -60,6 +68,12 @@ export default new Vuex.Store({
     },
     CHANGE_IS_LOAD: (state) => {
       state.isLoad = !state.isLoad;
+    },
+    SET_STATUS: (state, payload) => {
+      state.status = payload;
+    },
+    SET_TEST: (state, payload) => {
+      state.test = payload;
     },
   },
   actions: {
@@ -102,19 +116,43 @@ export default new Vuex.Store({
       formData.append("studentClass", payload.clas);
       formData.append("format", payload.file.name.split(".")[1]);
       formData.append("topic", payload.topic);
-      formData.append("login", state.getters.USER_LOGIN);
+      formData.append("login", localStorage.getItem("Login"));
       let data = await Axios.post(`${Url}api/admintest/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      state.commit("SET_FILE_SEND_MESSAGE", data.data.data.message);
+      state.commit("SET_FILE_SEND_MESSAGE", data.data.message);
       setTimeout(state.commit("SET_FILE_SEND_MESSAGE", ""), 3000);
     },
     CREATE_TEST: async (state, payload) => {
       console.log(payload);
       let data = await Axios.post(`${Url}api/admintest/createtest`, payload);
       console.log(data);
+      state.commit("SET_STATUS", data.status);
+    },
+    GET_TESTS: async (context) => {
+      let data = await Axios.post(`${Url}api/admintest/getalltest`, {
+        login: localStorage.getItem("Login"),
+      });
+      console.log(data);
+      context.commit("SET_TESTS", data);
+    },
+    SEND_TEST: async (state, payload) => {
+      let data = await Axios.post(`${Url}api/admintest/sendtest`, payload);
+      console.log(data);
+    },
+    GET_TEST: async (context) => {
+      let data = await Axios.get(
+        `${Url}api/admintest/getTest/${localStorage.getItem("id")}`
+      );
+      context.commit("SET_TEST", data.data.data.test.test);
+    },
+    SEND_ANSWERS: async (context, payload) => {
+      let data = await Axios.post(`${Url}api/admintest/verifytest`, payload);
+      alert(`Вітаємо у вас ${data.data.data.bal} балів!`);
+      localStorage.clear();
+      localStorage.setItem("log", 1);
     },
   },
   modules: {},

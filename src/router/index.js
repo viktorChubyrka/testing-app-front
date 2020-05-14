@@ -6,6 +6,7 @@ import Registration from "../views/Registration.vue";
 import UserRoom from "../views/UserRoom.vue";
 import TestingPage from "../views/TestingPage.vue";
 import UserTest from "../components/user/UserTest.vue";
+import UserDataPage from "../components/user/UserDataPage.vue";
 
 Vue.use(VueRouter);
 
@@ -26,13 +27,17 @@ const routes = [
     component: UserRoom,
   },
   {
-    path: "/Test/:id",
+    path: "/Test/",
     name: "TestingPage",
     component: TestingPage,
     children: [
       {
         path: "testing",
         component: UserTest,
+      },
+      {
+        path: ":token/:idT/userData",
+        component: UserDataPage,
       },
     ],
   },
