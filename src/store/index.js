@@ -4,7 +4,7 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 
-const Url = process.env.URL;
+const Url = process.env.VUE_APP_URL;
 
 export default new Vuex.Store({
   state: {
