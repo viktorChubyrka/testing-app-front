@@ -90,7 +90,7 @@ export default new Vuex.Store({
     },
     LOGIN_USER: async (state, payload) => {
       let data = await Axios.post(`${Url}api/user/login`, payload.user);
-      console.log(data.data);
+
       if (data.data.status == 200) {
         state.commit("SET_LOGINERROR", "");
         state.commit("SET_USER_LOGIN", data.data.data.user.login);
@@ -103,7 +103,6 @@ export default new Vuex.Store({
       }
     },
     GET_CATEGORYS: async (state) => {
-      console.log(localStorage.getItem("Login"));
       let data = await Axios.post(`${Url}api/user/getcategory`, {
         login: localStorage.getItem("Login"),
       });
@@ -126,21 +125,17 @@ export default new Vuex.Store({
       setTimeout(state.commit("SET_FILE_SEND_MESSAGE", ""), 3000);
     },
     CREATE_TEST: async (state, payload) => {
-      console.log(payload);
       let data = await Axios.post(`${Url}api/admintest/createtest`, payload);
-      console.log(data);
       state.commit("SET_STATUS", data.status);
     },
     GET_TESTS: async (context) => {
       let data = await Axios.post(`${Url}api/admintest/getalltest`, {
         login: localStorage.getItem("Login"),
       });
-      console.log(data);
       context.commit("SET_TESTS", data);
     },
     SEND_TEST: async (state, payload) => {
-      let data = await Axios.post(`${Url}api/admintest/sendtest`, payload);
-      console.log(data);
+      await Axios.post(`${Url}api/admintest/sendtest`, payload);
     },
     GET_TEST: async (context) => {
       let data = await Axios.get(

@@ -75,7 +75,7 @@
               </p>
               <p>
                 Перетягніть свої файли сюди або натисніть щоб завантажити
-                <br />(підтримуються файли формату .doc .tec .csv)
+                <br />(підтримуються файли формату .docx .tec .csv)
               </p>
             </div>
           </section>
@@ -116,7 +116,7 @@ export default {
       let splitedFileName = this.dropFiles[fileIndex - 1].name.split(".");
       let fileNameIndex = splitedFileName.length;
       if (
-        splitedFileName[fileNameIndex - 1] == "doc" ||
+        splitedFileName[fileNameIndex - 1] == "docx" ||
         splitedFileName[fileNameIndex - 1] == "csv" ||
         splitedFileName[fileNameIndex - 1] == "tec"
       ) {
