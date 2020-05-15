@@ -129,7 +129,11 @@ export default new Vuex.Store({
     },
     CREATE_TEST: async (state, payload) => {
       let data = await Axios.post(`${Url}api/admintest/createtest`, payload);
-      state.commit("SET_STATUS", data.status);
+      if (data.status == 200) {
+        alert("Тест створено успішно");
+      } else {
+        alert("Упс... тест не створено");
+      }
     },
     GET_TESTS: async (context) => {
       let data = await Axios.post(`${Url}api/admintest/getalltest`, {

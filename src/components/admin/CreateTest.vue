@@ -91,12 +91,6 @@ export default {
         name: this.name,
         login: localStorage.getItem("Login"),
       });
-      if (this.$store.getters.STATUS == 200) {
-        alert("Тест створено успішно");
-        this.$store.commit("SET_STATUS", 0);
-      } else {
-        alert("Упс... тест не створено");
-      }
     },
   },
   created() {
