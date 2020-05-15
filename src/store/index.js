@@ -1,8 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Axios from "axios";
+import dotenv from "dotenv";
 
 Vue.use(Vuex);
+
+dotenv.config();
 
 const Url = process.env.VUE_APP_URL;
 

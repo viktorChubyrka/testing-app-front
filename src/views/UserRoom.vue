@@ -1,7 +1,12 @@
 <template>
   <section class="container-main">
     <div class="container is-fullheight">
-      <b-tabs type="is-boxed" size="is-medium" expanded>
+      <b-tabs
+        @change="getAllCategorys(), getAllTests()"
+        type="is-boxed"
+        size="is-medium"
+        expanded
+      >
         <b-tab-item icon="file-plus" label="Додати новий файл">
           <AddFile />
         </b-tab-item>
@@ -31,6 +36,14 @@ export default {
   },
   mounted() {
     this.$store.dispatch("GET_CATEGORYS");
+  },
+  methods: {
+    getAllCategorys() {
+      this.$store.dispatch("GET_CATEGORYS");
+    },
+    getAllTests() {
+      this.$store.dispatch("GET_TESTS");
+    },
   },
 };
 </script>
