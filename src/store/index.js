@@ -4,7 +4,7 @@ import Axios from "axios";
 
 Vue.use(Vuex);
 
-const Url = "https://a092de36.ngrok.io/";
+const Url = process.env.URL;
 
 export default new Vuex.Store({
   state: {

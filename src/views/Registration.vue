@@ -59,7 +59,6 @@
             />
           </div>
         </div>
-        {{ newUser }}
         <div class="buttons">
           <b-button
             :loading="isLoad"
