@@ -42,7 +42,6 @@
             >Увійти</b-button
           >
         </div>
-        {{ userToLogIn }}
         <div class="suptitle has-text-centered">
           <router-link to="/registration">Зареєструватися</router-link>
         </div>
