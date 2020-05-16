@@ -20,8 +20,12 @@ export default new Vuex.Store({
     categorys: [],
     status: "",
     test: [],
+    complitedTests: [],
   },
   getters: {
+    COMPLITED_TESTS: (state) => {
+      return state.complitedTests;
+    },
     LOGINERROR: (state) => {
       return state.logInError;
     },
@@ -51,6 +55,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    SET_COMPLITED_TESTS: (state, payload) => {
+      state.complitedTests = payload;
+    },
     SET_LOGINERROR: (state, payload) => {
       state.logInError = payload;
     },
@@ -93,6 +100,7 @@ export default new Vuex.Store({
     },
     LOGIN_USER: async (state, payload) => {
       let data = await Axios.post(`${Url}api/user/login`, payload.user);
+      console.log(data);
 
       if (data.data.status == 200) {
         state.commit("SET_LOGINERROR", "");
@@ -155,6 +163,13 @@ export default new Vuex.Store({
       alert(`Вітаємо у вас ${data.data.data.bal} балів!`);
       localStorage.clear();
       localStorage.setItem("log", 1);
+    },
+    GET_COMPLITED_TESTS: async (state) => {
+      let data = await Axios.get(
+        `${Url}api/user/complitedtest/${localStorage.getItem("Login")}`
+      );
+      state.commit("SET_COMPLITED_TESTS", data.data);
+      console.log(data.data);
     },
   },
   modules: {},

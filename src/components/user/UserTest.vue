@@ -1,9 +1,7 @@
 <template>
   <div class="container is-fullheight">
     <div v-if="log == 1">
-      <h1 style="text-align:center;font-size:40px">
-        Ви вже прошли тест
-      </h1>
+      <h1 style="text-align:center;font-size:40px">Ви вже прошли тест</h1>
     </div>
     <section v-else style="width:95%;margin: auto;padding-top:10%">
       <b-steps size="is-small" type="is-black">
@@ -18,9 +16,11 @@
           <h1 style="margin:2% 0;font-weight:bold">{{ task.question }}</h1>
           <section>
             <div v-for="(ans, i) in task.answers" :key="i" class="field">
-              <b-radio v-model="radio[index]" :native-value="i">{{
+              <b-radio v-model="radio[index]" :native-value="i">
+                {{
                 ans
-              }}</b-radio>
+                }}
+              </b-radio>
             </div>
           </section>
         </b-step-item>
@@ -31,8 +31,7 @@
               style="margin-top:1rem"
               @click="finishTest()"
               expanded
-              >Завершити тест</b-button
-            >
+            >Завершити тест</b-button>
           </div>
         </b-step-item>
       </b-steps>
@@ -43,7 +42,7 @@
 export default {
   data() {
     return {
-      radio: [],
+      radio: []
     };
   },
   methods: {
@@ -52,15 +51,16 @@ export default {
       for (let index = 0; index < this.radio.length; index++) {
         data.push({
           question: this.tests[index].question,
-          answer: this.tests[index].answers[this.radio[index]],
+          answer: this.tests[index].answers[this.radio[index]]
         });
       }
       this.$store.dispatch("SEND_ANSWERS", {
         test: data,
         id: localStorage.getItem("id"),
         name: localStorage.getItem("name"),
+        userId: localStorage.getItem("AdminId")
       });
-    },
+    }
   },
   created() {
     this.$store.dispatch("GET_TEST");
@@ -71,8 +71,8 @@ export default {
     },
     log() {
       return localStorage.getItem("log");
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

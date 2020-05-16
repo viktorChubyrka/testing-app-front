@@ -77,6 +77,7 @@ export default {
           this.$store.dispatch("SEND_TEST", {
             users: users,
             testId: this.test._id,
+            login: localStorage.getItem("Login"),
           });
           this.$buefy.toast.open(`Тест відправлено успішно!`);
         },

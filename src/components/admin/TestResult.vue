@@ -5,49 +5,34 @@
         <div class="tile is-child is-12">
           <div class="columns">
             <div class="column is-6">
-              <b-field label="Дисципліна">
-                <b-select type="is-info" expanded placeholder="Дисципліна">
-                  <option v-for="option in 2" :value="option" :key="option">{{
-                    option
-                  }}</option>
-                </b-select>
-              </b-field>
-            </div>
-          </div>
-        </div>
-        <div class="tile is-child is-12">
-          <div class="columns">
-            <div class="column is-6">
               <b-field label="Назва тесту">
-                <b-select type="is-info" expanded placeholder="Назва тесту">
-                  <option v-for="option in 2" :value="option" :key="option">{{
-                    option
-                  }}</option>
+                <b-select v-model="test" type="is-info" expanded placeholder="Назва тесту">
+                  <option v-for="option in complitedTests" :value="option" :key="option">
+                    {{
+                    option.testName
+                    }}
+                  </option>
                 </b-select>
               </b-field>
             </div>
           </div>
         </div>
       </div>
-      <div class="tile is-parent">
+      <div v-if="test" class="tile is-parent">
         <div class="tile is-child is-6">
           <b-table
             @select="func()"
-            :data="users"
+            :data="test.complitedByUser"
             :columns="columns"
             :selected.sync="select"
             focusable
           ></b-table>
         </div>
-        <div class="tile is-child is-6">
+        <div v-if="select" class="tile is-child is-6">
           <div class="ansvers">
-            <div
-              :class="task.color ? colors[1] : colors[0]"
-              v-for="(task, index) in tasks"
-              :key="index"
-            >
-              <h2>{{ index + 1 }} {{ task.task }}</h2>
-              <h2>({{ task.userAnsver }})</h2>
+            <div class="green" v-for="(task, index) in select.tests" :key="index">
+              <h2>{{ index + 1 }} {{ task.question }}</h2>
+              <h2>({{ task.answer}})</h2>
             </div>
           </div>
         </div>
@@ -58,52 +43,25 @@
 <script>
 export default {
   data() {
-    const users = [
-      {
-        id: 1,
-        name: "Петренко Петро",
-        mark: 10,
-      },
-      {
-        id: 2,
-        name: "Іваненко Іван",
-        mark: 2,
-      },
-    ];
     return {
+      test: null,
       colors: ["red", "green"],
-      tasks: [
-        {
-          count: "1",
-          task: "How old are you?",
-          userAnsver: "12",
-          color: false,
-        },
-        {
-          count: "1",
-          task: "How old are you?",
-          userAnsver: "12",
-          color: false,
-        },
-        {
-          count: "1",
-          task: "How old are you?",
-          userAnsver: "12",
-          color: true,
-        },
-      ],
-      users,
+
       select: null,
       columns: [
-        { field: "id", label: "ID" },
-        { field: "name", label: "Прізвище Ім'я" },
+        { field: "userName", label: "Прізвище Ім'я" },
         {
           field: "mark",
           label: "Оцінка",
-          centered: true,
-        },
-      ],
+          centered: true
+        }
+      ]
     };
+  },
+  computed: {
+    complitedTests() {
+      return this.$store.getters.COMPLITED_TESTS;
+    }
   },
 
   methods: {
@@ -111,14 +69,11 @@ export default {
       {
         console.log(this.s);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style>
-.red {
-  color: red;
-}
 .green {
   color: green;
 }

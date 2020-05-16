@@ -36,7 +36,7 @@ const routes = [
         component: UserTest,
       },
       {
-        path: ":token/:idT/userData",
+        path: ":token/:idT/:idA/userData",
         component: UserDataPage,
       },
     ],

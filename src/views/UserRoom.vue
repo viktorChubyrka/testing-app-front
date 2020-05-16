@@ -2,7 +2,7 @@
   <section class="container-main">
     <div class="container is-fullheight">
       <b-tabs
-        @change="getAllCategorys(), getAllTests()"
+        @change="getAllCategorys(), getAllTests(),getComplitedTests()"
         type="is-boxed"
         size="is-medium"
         expanded
@@ -44,7 +44,10 @@ export default {
     getAllTests() {
       this.$store.dispatch("GET_TESTS");
     },
-  },
+    getComplitedTests() {
+      this.$store.dispatch("GET_COMPLITED_TESTS");
+    }
+  }
 };
 </script>
 <style scoped>
